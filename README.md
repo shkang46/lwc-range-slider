@@ -1,18 +1,51 @@
-# Salesforce DX Project: Next Steps
+LWC Range Slider
+==
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Intro
+Standard component인 lightning-slider가 하나의 변수에 대해서만 지원하기 때문에, 2개 변수를 사용해 범위 조절이 가능한 커스텀 slider를 구현하였음. <br>
+<br>
 
-## How Do You Plan to Deploy Your Changes?
+## Attribute
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+|Name|Type|Default|Description|
+|---|---|---|---|
+|`min`|number|0|
+|`max`|number|100|
+|`left`|number|0|작은 값의 초기값|
+|`right`|number|100|큰 값의 초기값|
+|`step`|number|0||
+|`allowZeroRange`|boolean|false|`true`로 지정하면 left와 right가 같아질 수 있음|
+<br>
 
-## Configure Your Salesforce DX Project
+## Method
+|Name|Parameter|
+|---|---|
+|setLeft|`value` (number)|
+|setRight|`value` (number)|
+<br>
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+## Event
+|Name|Payload|
+|---|---|
+|`sliderinput`|`detail`: {`left`,`right`}|
+<br>
 
-## Read All About It
+## Usage
+```html
+<c-range-slider
+            min={min}
+            max={max}
+            left={left}
+            right={right}
+            step={step}
+            allow-zero-range=true
+            onsliderinput={handleInput}
+></c-range-slider>
+```
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+```js
+handleInput(event) {
+    this.left = event.detail.left;
+    this.right = event.detail.right;
+}
+```
