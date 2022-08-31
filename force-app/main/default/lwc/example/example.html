@@ -1,0 +1,38 @@
+<!--
+  @description       : 
+  @author            : Seongho Kang
+  @group             : i2max R&D
+  @last modified on  : 08-31-2022
+  @last modified by  : Seongho Kang
+  Modifications Log
+  Ver   Date         Author         Modification
+  1.0   08-31-2022   Seongho Kang   Initial Version
+-->
+<template>
+    <div class="container">
+        <c-range-slider
+            min={min}
+            max={max}
+            left={left}
+            right={right}
+            step={step}
+            onsliderinput={handleInput}
+        ></c-range-slider>
+
+        <lightning-layout class="time-counter" horizontal-align="center" vertical-align="center">
+            <lightning-layout-item flexibility="auto" padding="around-small">
+                <lightning-formatted-time value={startTime}></lightning-formatted-time>
+            </lightning-layout-item>
+
+            <lightning-layout-item flexibility="auto" padding="around-small">
+                <p>~</p>
+            </lightning-layout-item>
+
+            <lightning-layout-item flexibility="auto" padding="around-small">
+                <lightning-formatted-time value={endTime}></lightning-formatted-time>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-button label="Reset" onclick={handleReset}></lightning-button>
+    </div>
+</template>
