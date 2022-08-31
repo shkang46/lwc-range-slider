@@ -5,6 +5,8 @@ LWC Range Slider
 Standard component인 lightning-slider가 하나의 변수에 대해서만 지원하기 때문에, <br>
 2개 변수를 사용해 범위 조절이 가능한 커스텀 slider를 구현하였음. <br>
 <br>
+![Aug-31-2022 10-46-44](https://user-images.githubusercontent.com/73949610/187574814-9f206a91-8042-4d9a-843f-69ba6cd48cb7.gif)
+
 
 ## Attribute
 
