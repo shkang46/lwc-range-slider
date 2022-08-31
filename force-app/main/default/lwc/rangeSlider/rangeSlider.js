@@ -30,6 +30,12 @@ export default class RangeSlider extends LightningElement {
      * @type {boolean} false as default
      */
     @api allowZeroRange = false;
+    get _allowZeroRange() {
+        if (this.allowZeroRange === true || this.allowZeroRange === "true") {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * @type {number}
@@ -63,14 +69,14 @@ export default class RangeSlider extends LightningElement {
 
     handleInputLeft(event) {
         const leftVal = parseInt(event.target.value, 10);
-        const maxVal = parseInt(this.allowZeroRange ? this._right : this._right - Number(this.step), 10);
+        const maxVal = parseInt(this._allowZeroRange ? this._right : this._right - Number(this.step), 10);
 
         this.setLeft(Math.min(leftVal, maxVal));
     }
 
     handleInputRight(event) {
         const rightVal = parseInt(event.target.value, 10);
-        const minVal = parseInt(this.allowZeroRange ? this._left : this._left + Number(this.step), 10);
+        const minVal = parseInt(this._allowZeroRange ? this._left : this._left + Number(this.step), 10);
 
         this.setRight(Math.max(rightVal, minVal));
     }
