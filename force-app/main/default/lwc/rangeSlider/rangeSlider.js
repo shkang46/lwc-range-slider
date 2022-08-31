@@ -88,7 +88,7 @@ export default class RangeSlider extends LightningElement {
         const valToNum = Number(value);
 
         this._left = valToNum;
-        this.moveLeftThumb(valToNum, parseInt(this.min, 10), parseInt(this.max, 10));
+        this.moveLeftThumb(valToNum);
 
         this.dispatchInput();
     }
@@ -100,29 +100,25 @@ export default class RangeSlider extends LightningElement {
         const valToNum = Number(value);
 
         this._right = valToNum;
-        this.moveRightThumb(valToNum, parseInt(this.min, 10), parseInt(this.max, 10));
+        this.moveRightThumb(valToNum);
 
         this.dispatchInput();
     }
 
     /**
      * @param {number} value
-     * @param {number} min
-     * @param {number} max
      */
-    moveLeftThumb(value, min, max) {
-        const percent = ((value - min) / (max - min)) * 100;
+    moveLeftThumb(value) {
+        const percent = ((value - this.min) / (this.max - this.min)) * 100;
         this.thumbLeft.style.left = percent + "%";
         this.range.style.left = percent + "%";
     }
 
     /**
      * @param {number} value
-     * @param {number} min
-     * @param {number} max
      */
-    moveRightThumb(value, min, max) {
-        const percent = ((value - min) / (max - min)) * 100;
+    moveRightThumb(value) {
+        const percent = ((value - this.min) / (this.max - this.min)) * 100;
         this.thumbRight.style.right = 100 - percent + "%";
         this.range.style.right = 100 - percent + "%";
     }
