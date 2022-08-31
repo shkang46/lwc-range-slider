@@ -1,4 +1,4 @@
-.container {
+.wrapper {
     position: relative;
     min-width: 100px;
     width: 100%;
@@ -29,7 +29,6 @@
     border-radius: 5px;
     background: rgb(1, 118, 211);
     background: linear-gradient(270deg, rgba(1, 118, 211, 1) 0%, rgba(27, 150, 255, 1) 26%, rgba(227, 229, 237, 1) 100%);
-    transition: 0.1s !important;
 }
 .slider > .thumb {
     position: absolute;
@@ -38,7 +37,6 @@
     height: 20px;
     background: rgb(1, 118, 211);
     border-radius: 50%;
-    transition: 0.1s !important;
 }
 .slider > .thumb.left {
     left: 0%;

@@ -2,30 +2,22 @@
   @description       : 
   @author            : Seongho Kang
   @group             : i2max R&D
-  @last modified on  : 08-29-2022
+  @last modified on  : 08-31-2022
   @last modified by  : Seongho Kang
   Modifications Log
   Ver   Date         Author         Modification
   1.0   08-29-2022   Seongho Kang   Initial Version
 -->
 <template>
-    <div class="container">
+    <div class="wrapper">
         <div class="multi-range-slider">
-            <input
-                type="range"
-                class="input-left"
-                min={_min}
-                max={_max}
-                step={_step}
-                value={_left}
-                oninput={handleInputLeft}
-            />
+            <input type="range" class="input-left" min={min} max={max} step={step} value={_left} oninput={handleInputLeft} />
             <input
                 type="range"
                 class="input-right"
-                min={_min}
-                max={_max}
-                step={_step}
+                min={min}
+                max={max}
+                step={step}
                 value={_right}
                 oninput={handleInputRight}
             />

@@ -58,41 +58,45 @@ export default class RangeSlider extends LightningElement {
     }
 
     connectedCallback() {
-        [this._left, this._right] = [this.left, this.right];
+        [this._left, this._right] = [Number(this.left), Number(this.right)];
     }
 
     handleInputLeft(event) {
         const leftVal = parseInt(event.target.value, 10);
-        const maxVal = parseInt(this.allowZeroRange ? this._right : this._right - this.step, 10);
+        const maxVal = parseInt(this.allowZeroRange ? this._right : this._right - Number(this.step), 10);
 
         this.setLeft(Math.min(leftVal, maxVal));
-        this.dispatchInput();
     }
 
     handleInputRight(event) {
         const rightVal = parseInt(event.target.value, 10);
-        const minVal = parseInt(this.allowZeroRange ? this._left : this._left + this.step, 10);
+        const minVal = parseInt(this.allowZeroRange ? this._left : this._left + Number(this.step), 10);
 
         this.setRight(Math.max(rightVal, minVal));
+    }
+
+    /**
+     * @param {number} value
+     */
+    @api setLeft(value) {
+        const valToNum = Number(value);
+
+        this._left = valToNum;
+        this.moveLeftThumb(valToNum, parseInt(this.min, 10), parseInt(this.max, 10));
+
         this.dispatchInput();
     }
 
     /**
      * @param {number} value
      */
-    setLeft(value) {
-        this._left = value;
+    @api setRight(value) {
+        const valToNum = Number(value);
 
-        this.moveLeftThumb(value, parseInt(this.min, 10), parseInt(this.max, 10));
-    }
+        this._right = valToNum;
+        this.moveRightThumb(valToNum, parseInt(this.min, 10), parseInt(this.max, 10));
 
-    /**
-     * @param {number} value
-     */
-    setRight(value) {
-        this._right = value;
-
-        this.moveRightThumb(value, parseInt(this.min, 10), parseInt(this.max, 10));
+        this.dispatchInput();
     }
 
     /**
