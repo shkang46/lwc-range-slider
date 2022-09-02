@@ -106,6 +106,14 @@ export default class RangeSlider extends LightningElement {
     }
 
     /**
+     * Reset values as default min, max
+     */
+    @api reset() {
+        this.setLeft(this.min);
+        this.setRight(this.max);
+    }
+
+    /**
      * @param {number} value
      */
     moveLeftThumb(value) {
