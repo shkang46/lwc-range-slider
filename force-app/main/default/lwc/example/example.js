@@ -1,11 +1,4 @@
 import { LightningElement } from "lwc";
-import LANG from "@salesforce/i18n/lang";
-
-const OPTION_FOR_TIME = {
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
-};
 
 export default class Example extends LightningElement {
     /**
@@ -33,14 +26,6 @@ export default class Example extends LightningElement {
      */
     step = 5 * 60 * 1000; // 5 min
 
-    get startTime() {
-        return new Date(this.left).toLocaleString(LANG, OPTION_FOR_TIME);
-    }
-
-    get endTime() {
-        return new Date(this.right).toLocaleString(LANG, OPTION_FOR_TIME);
-    }
-
     connectedCallback() {
         this.setDefault();
     }
@@ -61,9 +46,6 @@ export default class Example extends LightningElement {
     }
 
     handleReset() {
-        const slider = this.template.querySelector("c-range-slider");
-
-        slider.setLeft(this.min);
-        slider.setRight(this.max);
+        this.template.querySelector("c-range-slider")?.reset();
     }
 }

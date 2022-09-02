@@ -2,7 +2,7 @@
   @description       : 
   @author            : Seongho Kang
   @group             : i2max R&D
-  @last modified on  : 08-31-2022
+  @last modified on  : 09-02-2022
   @last modified by  : Seongho Kang
   Modifications Log
   Ver   Date         Author         Modification
@@ -21,7 +21,13 @@
 
         <lightning-layout class="time-counter" horizontal-align="center" vertical-align="center">
             <lightning-layout-item flexibility="auto" padding="around-small">
-                <lightning-formatted-time value={startTime}></lightning-formatted-time>
+                <lightning-formatted-date-time
+                    value={left}
+                    month="short"
+                    day="2-digit"
+                    hour="2-digit"
+                    minute="2-digit"
+                ></lightning-formatted-date-time>
             </lightning-layout-item>
 
             <lightning-layout-item flexibility="auto" padding="around-small">
@@ -29,7 +35,13 @@
             </lightning-layout-item>
 
             <lightning-layout-item flexibility="auto" padding="around-small">
-                <lightning-formatted-time value={endTime}></lightning-formatted-time>
+                <lightning-formatted-date-time
+                    value={right}
+                    month="short"
+                    day="2-digit"
+                    hour="2-digit"
+                    minute="2-digit"
+                ></lightning-formatted-date-time>
             </lightning-layout-item>
         </lightning-layout>
 
