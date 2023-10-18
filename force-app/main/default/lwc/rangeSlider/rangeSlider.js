@@ -1,6 +1,12 @@
+/* --------------------------------------------------------------------------------------------------------
+* Import
+-------------------------------------------------------------------------------------------------------- */
 import { LightningElement, api } from "lwc";
 
 export default class RangeSlider extends LightningElement {
+    /* --------------------------------------------------------------------------------------------------------
+	* Public Property
+	-------------------------------------------------------------------------------------------------------- */
     /**
      * @type {number}
      * @default 0
@@ -14,53 +20,20 @@ export default class RangeSlider extends LightningElement {
     @api max = 100;
 
     /**
-     * @type {number}
-     * @default 0
+     * @type {number} 0 as default
      */
     @api step = 0;
-
-    /**
-     * @type {number}
-     * @default 0
-     */
-    @api set left(value) {
-        if (!value) return;
-        this._left = Number(value);
-    }
-
-    get left() {
-        return this._left;
-    }
-
-    _left = 0;
-
-    /**
-     * @type {number}
-     * @default 100
-     */
-    @api set right(value) {
-        if (!value) return;
-        this._right = Number(value);
-    }
-
-    get right() {
-        return this._right;
-    }
-
-    _right = 100;
 
     /**
      * @type {boolean} false as default
      * @deafult false
      */
-    @api set allowZeroRange(value) {
-        this._allowZeroRange = value === true || value === "true";
+    @api set allowZeroRange(v) {
+        this._allowZeroRange = this.allowZeroRange === true || this.allowZeroRange === "true";
     }
-
     get allowZeroRange() {
         return this._allowZeroRange;
     }
-
     _allowZeroRange = false;
 
     /**
@@ -70,6 +43,8 @@ export default class RangeSlider extends LightningElement {
         const valToNum = Number(value);
 
         this._left = valToNum;
+        this.refs.inputLeft.value = valToNum;
+
         this.moveLeftThumb(valToNum);
 
         this.dispatchInput();
@@ -81,7 +56,9 @@ export default class RangeSlider extends LightningElement {
     @api setRight(value) {
         const valToNum = Number(value);
 
-        this._right = valToNum;
+        this.right = valToNum;
+        this.refs.inputRight.value = valToNum;
+
         this.moveRightThumb(valToNum);
 
         this.dispatchInput();
@@ -95,6 +72,49 @@ export default class RangeSlider extends LightningElement {
         this.setRight(this.max);
     }
 
+    /* --------------------------------------------------------------------------------------------------------
+	* Private Property
+	-------------------------------------------------------------------------------------------------------- */
+    /**
+     * @type {number} min as default
+     */
+    set left(v) {
+        this._left = Number(v);
+    }
+    get left() {
+        return this._left || this.min;
+    }
+    _left;
+
+    /**
+     * @type {number} max as default
+     */
+    set right(v) {
+        this._right = Number(v);
+    }
+    get right() {
+        return this._right || this.max;
+    }
+    _right;
+
+    /* --------------------------------------------------------------------------------------------------------
+	* Flag
+	-------------------------------------------------------------------------------------------------------- */
+    isRendered = false;
+
+    /* --------------------------------------------------------------------------------------------------------
+	* Lifecycle Hook
+	-------------------------------------------------------------------------------------------------------- */
+    renderedCallback() {
+        if (this.isRendered) return;
+        this.isRendered = true;
+
+        this.initSliders();
+    }
+
+    /* --------------------------------------------------------------------------------------------------------
+	* Event Handler
+	-------------------------------------------------------------------------------------------------------- */
     handleInputLeft(event) {
         const leftVal = parseInt(event.target.value, 10);
         const maxVal = parseInt(this.allowZeroRange ? this.right : this.right - Number(this.step), 10);
@@ -107,6 +127,14 @@ export default class RangeSlider extends LightningElement {
         const minVal = parseInt(this.allowZeroRange ? this.left : this.left + Number(this.step), 10);
 
         this.setRight(Math.max(rightVal, minVal));
+    }
+
+    /* --------------------------------------------------------------------------------------------------------
+	* Logic Method
+	-------------------------------------------------------------------------------------------------------- */
+    initSliders() {
+        this.refs.inputLeft.value = this.left;
+        this.refs.inputRight.value = this.right;
     }
 
     /**

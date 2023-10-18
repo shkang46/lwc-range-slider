@@ -5,15 +5,13 @@ export default class Example extends LightningElement {
     max;
     left;
     right;
-    step = 5 * 60 * 1000; // 5 min
 
     get props() {
         return {
             min: this.min,
             max: this.max,
-            left: this.left,
-            right: this.right,
-            step: this.step
+            step: 5 * 60 * 1000, // 5 min
+            allowZeroRange: false
         };
     }
 
@@ -24,11 +22,10 @@ export default class Example extends LightningElement {
     setDefault() {
         const today = new Date();
 
-        const min = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0).valueOf();
-        const max = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 0, 0, 0).valueOf();
+        this.min = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0).valueOf();
+        this.max = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 0, 0, 0).valueOf();
 
-        [this.min, this.max] = [min, max];
-        [this.left, this.right] = [min, max];
+        [this.left, this.right] = [this.min, this.max];
     }
 
     handleInput(event) {
@@ -40,6 +37,6 @@ export default class Example extends LightningElement {
     }
 
     handleReset() {
-        this.template.querySelector("c-range-slider")?.reset();
+        this.refs.slider?.reset();
     }
 }

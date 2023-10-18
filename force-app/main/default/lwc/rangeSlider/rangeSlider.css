@@ -46,7 +46,7 @@
 .slider > .thumb.right {
     right: 0%;
     transform: translate(10px, -5px);
-    background: rgba(1, 118, 211, 1);
+    background: rgba(27, 150, 255, 1);
 }
 
 input[type="range"] {

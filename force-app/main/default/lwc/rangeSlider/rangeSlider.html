@@ -2,8 +2,8 @@
 <template>
     <div class="wrapper">
         <div class="multi-range-slider">
-            <input type="range" label="inputLeft" min={min} max={max} step={step} value={_left} oninput={handleInputLeft} />
-            <input type="range" min={min} max={max} step={step} value={_right} oninput={handleInputRight} />
+            <input type="range" lwc:ref="inputLeft" min={min} max={max} step={step} oninput={handleInputLeft} />
+            <input type="range" lwc:ref="inputRight" min={min} max={max} step={step} oninput={handleInputRight} />
             <div class="slider">
                 <div class="track"></div>
                 <div class="range" lwc:ref="range"></div>
