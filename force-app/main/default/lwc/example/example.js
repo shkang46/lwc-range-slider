@@ -10,7 +10,7 @@ export default class Example extends LightningElement {
         return {
             min: this.min,
             max: this.max,
-            step: 5 * 60 * 1000, // 5 min
+            step: 60 * 60 * 1000, // 5 min
             allowZeroRange: false
         };
     }
@@ -30,10 +30,7 @@ export default class Example extends LightningElement {
 
     handleInput(event) {
         this.left = event.detail.left;
-        console.log("%c LEFT ", "background: #943126; color: #fff;", this.left);
-
         this.right = event.detail.right;
-        console.log("%c RIGHT ", "background: #0c598d; color: #fff;", this.right);
     }
 
     handleReset() {

@@ -10,7 +10,7 @@
 -->
 <template>
     <div class="container">
-        <c-range-slider lwc:spread={props} onsliderinput={handleInput}></c-range-slider>
+        <c-range-slider lwc:ref="slider" lwc:spread={props} onsliderinput={handleInput}></c-range-slider>
 
         <lightning-layout class="time-counter" horizontal-align="center" vertical-align="center">
             <lightning-layout-item flexibility="auto" padding="around-small">
