@@ -1,30 +1,21 @@
 import { LightningElement } from "lwc";
 
 export default class Example extends LightningElement {
-    /**
-     * @type {number}
-     */
     min;
-
-    /**
-     * @type {number}
-     */
     max;
-
-    /**
-     * @type {number}
-     */
     left;
-
-    /**
-     * @type {number}
-     */
     right;
-
-    /**
-     * @type {number}
-     */
     step = 5 * 60 * 1000; // 5 min
+
+    get props() {
+        return {
+            min: this.min,
+            max: this.max,
+            left: this.left,
+            right: this.right,
+            step: this.step
+        };
+    }
 
     connectedCallback() {
         this.setDefault();
@@ -42,7 +33,10 @@ export default class Example extends LightningElement {
 
     handleInput(event) {
         this.left = event.detail.left;
+        console.log("%c LEFT ", "background: #943126; color: #fff;", this.left);
+
         this.right = event.detail.right;
+        console.log("%c RIGHT ", "background: #0c598d; color: #fff;", this.right);
     }
 
     handleReset() {

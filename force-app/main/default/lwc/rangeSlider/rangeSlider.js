@@ -2,84 +2,66 @@ import { LightningElement, api } from "lwc";
 
 export default class RangeSlider extends LightningElement {
     /**
-     * @type {number} 0 as default
+     * @type {number}
+     * @default 0
      */
     @api min = 0;
 
     /**
-     * @type {number} 100 as default
+     * @type {number}
+     * @default 100
      */
     @api max = 100;
 
     /**
-     * @type {number} 0 as default
-     */
-    @api left = 0;
-
-    /**
-     * @type {number} 100 as default
-     */
-    @api right = 100;
-
-    /**
-     * @type {number} 0 as default
+     * @type {number}
+     * @default 0
      */
     @api step = 0;
 
     /**
+     * @type {number}
+     * @default 0
+     */
+    @api set left(value) {
+        if (!value) return;
+        this._left = Number(value);
+    }
+
+    get left() {
+        return this._left;
+    }
+
+    _left = 0;
+
+    /**
+     * @type {number}
+     * @default 100
+     */
+    @api set right(value) {
+        if (!value) return;
+        this._right = Number(value);
+    }
+
+    get right() {
+        return this._right;
+    }
+
+    _right = 100;
+
+    /**
      * @type {boolean} false as default
+     * @deafult false
      */
-    @api allowZeroRange = false;
-    get _allowZeroRange() {
-        if (this.allowZeroRange === true || this.allowZeroRange === "true") {
-            return true;
-        }
-        return false;
+    @api set allowZeroRange(value) {
+        this._allowZeroRange = value === true || value === "true";
     }
 
-    /**
-     * @type {number}
-     */
-    _left;
-
-    /**
-     * @type {number}
-     */
-    _right;
-
-    get inputLeft() {
-        return this.template.querySelector(".input-left");
-    }
-    get inputRight() {
-        return this.template.querySelector(".input-right");
-    }
-    get thumbLeft() {
-        return this.template.querySelector(".thumb.left");
-    }
-    get thumbRight() {
-        return this.template.querySelector(".thumb.right");
-    }
-    get range() {
-        return this.template.querySelector(".range");
+    get allowZeroRange() {
+        return this._allowZeroRange;
     }
 
-    connectedCallback() {
-        [this._left, this._right] = [Number(this.left), Number(this.right)];
-    }
-
-    handleInputLeft(event) {
-        const leftVal = parseInt(event.target.value, 10);
-        const maxVal = parseInt(this._allowZeroRange ? this._right : this._right - Number(this.step), 10);
-
-        this.setLeft(Math.min(leftVal, maxVal));
-    }
-
-    handleInputRight(event) {
-        const rightVal = parseInt(event.target.value, 10);
-        const minVal = parseInt(this._allowZeroRange ? this._left : this._left + Number(this.step), 10);
-
-        this.setRight(Math.max(rightVal, minVal));
-    }
+    _allowZeroRange = false;
 
     /**
      * @param {number} value
@@ -113,13 +95,27 @@ export default class RangeSlider extends LightningElement {
         this.setRight(this.max);
     }
 
+    handleInputLeft(event) {
+        const leftVal = parseInt(event.target.value, 10);
+        const maxVal = parseInt(this.allowZeroRange ? this.right : this.right - Number(this.step), 10);
+
+        this.setLeft(Math.min(leftVal, maxVal));
+    }
+
+    handleInputRight(event) {
+        const rightVal = parseInt(event.target.value, 10);
+        const minVal = parseInt(this.allowZeroRange ? this.left : this.left + Number(this.step), 10);
+
+        this.setRight(Math.max(rightVal, minVal));
+    }
+
     /**
      * @param {number} value
      */
     moveLeftThumb(value) {
         const percent = ((value - this.min) / (this.max - this.min)) * 100;
-        this.thumbLeft.style.left = percent + "%";
-        this.range.style.left = percent + "%";
+        this.refs.thumbLeft.style.left = percent + "%";
+        this.refs.range.style.left = percent + "%";
     }
 
     /**
@@ -127,14 +123,14 @@ export default class RangeSlider extends LightningElement {
      */
     moveRightThumb(value) {
         const percent = ((value - this.min) / (this.max - this.min)) * 100;
-        this.thumbRight.style.right = 100 - percent + "%";
-        this.range.style.right = 100 - percent + "%";
+        this.refs.thumbRight.style.right = 100 - percent + "%";
+        this.refs.range.style.right = 100 - percent + "%";
     }
 
     dispatchInput() {
         this.dispatchEvent(
             new CustomEvent("sliderinput", {
-                detail: { left: this._left, right: this._right }
+                detail: { left: this.left, right: this.right }
             })
         );
     }
