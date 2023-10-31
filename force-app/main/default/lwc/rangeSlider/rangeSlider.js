@@ -1,3 +1,19 @@
+/**
+ * @module RangeSlider
+ * @extends LightningElement
+ * @description Range Slider
+ * @author shkang <shkang7291@naver.com>
+ *
+ * @example
+ <c-range-slider
+	lwc:ref="slider"
+	min="0"
+	max="100"
+	step="1"
+	allow-zero-range
+	onsliderinput={handleSliderInputChange}
+></c-range-slider>
+ */
 /* --------------------------------------------------------------------------------------------------------
 * Import
 -------------------------------------------------------------------------------------------------------- */
@@ -29,7 +45,7 @@ export default class RangeSlider extends LightningElement {
      * @deafult false
      */
     @api set allowZeroRange(v) {
-        this._allowZeroRange = this.allowZeroRange === true || this.allowZeroRange === "true";
+        this._allowZeroRange = v === true || v === "true";
     }
     get allowZeroRange() {
         return this._allowZeroRange;
@@ -42,7 +58,7 @@ export default class RangeSlider extends LightningElement {
     @api setLeft(left) {
         const valToNum = Number(left);
 
-        this._left = valToNum;
+        this.left = valToNum;
         this.refs.inputLeft.left = valToNum;
 
         this.moveLeftThumb(valToNum);
@@ -106,10 +122,7 @@ export default class RangeSlider extends LightningElement {
 	* Lifecycle Hook
 	-------------------------------------------------------------------------------------------------------- */
     renderedCallback() {
-        if (this.isRendered) return;
-        this.isRendered = true;
-
-        this.initSliders();
+        this.isRendered ||= (this.initSliders(), true);
     }
 
     /* --------------------------------------------------------------------------------------------------------
@@ -155,7 +168,17 @@ export default class RangeSlider extends LightningElement {
         this.refs.range.style.right = 100 - percent + "%";
     }
 
+    /**
+     * @fires module:RangeSlider~sliderinput
+     */
     dispatchInput() {
+        /**
+         * @event module:RangeSlider~sliderinput
+         * @type {Object}
+         * @property {Object} detail
+         * @property {number} detail.left
+         * @property {number} detail.right
+         */
         this.dispatchEvent(
             new CustomEvent("sliderinput", {
                 detail: { left: this.left, right: this.right }
