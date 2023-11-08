@@ -1,0 +1,53 @@
+{
+    "list": [
+        {
+            "title": "module:RangeSlider",
+            "link": "<a href=\"module-RangeSlider.html\">RangeSlider</a>",
+            "description": "Range Slider"
+        },
+        {
+            "title": "module:RangeSlider#allowZeroRange",
+            "link": "<a href=\"module-RangeSlider.html#allowZeroRange\">allowZeroRange</a>"
+        },
+        {
+            "title": "module:RangeSlider#dispatchInput",
+            "link": "<a href=\"module-RangeSlider.html#dispatchInput\">dispatchInput</a>"
+        },
+        { "title": "module:RangeSlider#left", "link": "<a href=\"module-RangeSlider.html#left\">left</a>" },
+        { "title": "module:RangeSlider#max", "link": "<a href=\"module-RangeSlider.html#max\">max</a>" },
+        { "title": "module:RangeSlider#min", "link": "<a href=\"module-RangeSlider.html#min\">min</a>" },
+        {
+            "title": "module:RangeSlider#moveLeftThumb",
+            "link": "<a href=\"module-RangeSlider.html#moveLeftThumb\">moveLeftThumb</a>"
+        },
+        {
+            "title": "module:RangeSlider#moveRightThumb",
+            "link": "<a href=\"module-RangeSlider.html#moveRightThumb\">moveRightThumb</a>"
+        },
+        {
+            "title": "module:RangeSlider#reset",
+            "link": "<a href=\"module-RangeSlider.html#reset\">reset</a>",
+            "description": "Reset values with default min, max"
+        },
+        {
+            "title": "module:RangeSlider#right",
+            "link": "<a href=\"module-RangeSlider.html#right\">right</a>",
+            "description": "max as default"
+        },
+        {
+            "title": "module:RangeSlider#setLeft",
+            "link": "<a href=\"module-RangeSlider.html#setLeft\">setLeft</a>",
+            "description": "Set left slider value"
+        },
+        {
+            "title": "module:RangeSlider#setRight",
+            "link": "<a href=\"module-RangeSlider.html#setRight\">setRight</a>",
+            "description": "Set right slider value"
+        },
+        { "title": "module:RangeSlider#step", "link": "<a href=\"module-RangeSlider.html#step\">step</a>" },
+        {
+            "title": "module:RangeSlider~event:sliderinput",
+            "link": "<a href=\"module-RangeSlider.html#~event:sliderinput\">sliderinput</a>"
+        }
+    ]
+}
