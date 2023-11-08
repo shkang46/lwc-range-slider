@@ -25,23 +25,24 @@ export default class RangeSlider extends LightningElement {
 	-------------------------------------------------------------------------------------------------------- */
     /**
      * @type {number}
-     * @default 0
+     * @default
      */
     @api min = 0;
 
     /**
      * @type {number}
-     * @default 100
+     * @default
      */
     @api max = 100;
 
     /**
-     * @type {number} 1 as default
+     * @type {number}
+     * @default
      */
     @api step = 1;
 
     /**
-     * @type {boolean} false as default
+     * @type {boolean}
      * @deafult false
      */
     @api set allowZeroRange(v) {
@@ -53,6 +54,8 @@ export default class RangeSlider extends LightningElement {
     _allowZeroRange = false;
 
     /**
+     * Set left slider value
+     *
      * @param {number} value
      */
     @api setLeft(left) {
@@ -67,6 +70,8 @@ export default class RangeSlider extends LightningElement {
     }
 
     /**
+     * Set right slider value
+     *
      * @param {number} value
      */
     @api setRight(right) {
@@ -81,7 +86,7 @@ export default class RangeSlider extends LightningElement {
     }
 
     /**
-     * Reset values as default min, max
+     * Reset values with default min, max
      */
     @api reset() {
         this.setLeft(this.min);
@@ -92,7 +97,8 @@ export default class RangeSlider extends LightningElement {
 	* Private Property
 	-------------------------------------------------------------------------------------------------------- */
     /**
-     * @type {number} min as default
+     * @type {number}
+     * @default min
      */
     set left(v) {
         this._left = Number(v);
@@ -104,6 +110,7 @@ export default class RangeSlider extends LightningElement {
 
     /**
      * @type {number} max as default
+     * @default max
      */
     set right(v) {
         this._right = Number(v);
